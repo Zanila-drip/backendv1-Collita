@@ -1,0 +1,101 @@
+==================================================
+PLANTILLA DEL PROYECTO DEMO12
+==================================================
+
+1. REQUISITOS DE INFRAESTRUCTURA
+--------------------------------
+- Plataforma de Despliegue: Railway
+- Control de Versiones: GitHub
+- Integración Continua (CI): GitHub Actions
+- Base de Datos: MongoDB
+
+2. HERRAMIENTAS DE DESARROLLO
+-----------------------------
+- API Testing: Postman
+  * Colección de endpoints organizada por recursos
+  * Variables de entorno para diferentes ambientes
+  * Tests automatizados para validaciones críticas
+
+- IDE Principal: IntelliJ Studio
+- Gestión de Dependencias: Gradle - Groovy
+
+3. ESTRUCTURA DEL PROYECTO
+--------------------------
+src/main/kotlin/com/desarrollomovil/demo12/
+├── config/         # Configuraciones de la aplicación
+├── controller/     # Controladores REST
+├── model/         # Modelos de datos
+├── repository/    # Repositorios de MongoDB
+├── service/       # Lógica de negocio
+└── util/          # Utilidades
+
+4. VERSIONADO DE LA API
+-----------------------
+- Prefijo de versión: /api/v1
+- Ejemplos de rutas:
+  * /api/v1/usuarios
+  * /api/v1/auth/login
+
+5. CONFIGURACIÓN DE LA APLICACIÓN
+--------------------------------
+Variables de Entorno:
+- MONGODB_URI: URI de conexión a MongoDB
+- PORT: Puerto de la aplicación (default: 8080)
+
+Endpoints de Monitoreo:
+- Health Check: /api/v1/actuator/health
+- Métricas: /api/v1/actuator/metrics
+- Info: /api/v1/actuator/info
+
+Documentación API:
+- Swagger UI: /api/v1/swagger-ui.html
+- OpenAPI: /api/v1/api-docs
+
+6. DEPENDENCIAS PRINCIPALES
+--------------------------
+- Spring Boot Web
+- Spring Data MongoDB
+- Spring Boot Actuator
+- SpringDoc OpenAPI
+- TestContainers (para pruebas)
+
+7. MONITOREO
+-----------
+Logs:
+- Visualización en tiempo real (Railway)
+- Almacenamiento temporal
+- Filtrado por tipo (error, info, warning)
+
+Métricas:
+- CPU, RAM, espacio en disco
+- Número de requests
+- Tiempo de respuesta promedio
+
+Alertas:
+- Uso excesivo de recursos
+- Errores frecuentes
+- Integración con Slack/Discord/Email
+
+8. CONVENCIÓN DE CÓDIGO
+-----------------------
+- Nombres de clases en PascalCase
+- Nombres de métodos y variables en camelCase
+- Constantes en UPPER_SNAKE_CASE
+- Paquetes en minúsculas
+
+9. TESTING
+----------
+- Tests unitarios con JUnit 5
+- Tests de integración con TestContainers
+- Cobertura de código mínima: 80%
+
+10. DESPLIEGUE
+--------------
+- Plataforma: Railway
+- CI/CD: GitHub Actions
+- Ambiente de producción protegido
+- Rollback automático en caso de fallo
+
+==================================================
+FIN DE LA PLANTILLA
+================================================== 

@@ -1,0 +1,90 @@
+==================================================
+CONFIGURACIÓN MONGODB ATLAS
+==================================================
+
+1. CONFIGURACIÓN DE CONEXIÓN
+----------------------------
+1.1 Detalles de Conexión
+    | Parámetro                  | Valor / Ejemplo                | Comentarios                                   |
+    | -------------------------- | ------------------------------ | --------------------------------------------- |
+    | URI de conexión            | ${MONGO_URI}                   | URI de conexión completa                      |
+    | Usuario                    | zanila                         | Usuario de MongoDB Atlas                      |
+    | Contraseña                 | salsita123                     | Contraseña de MongoDB Atlas                   |
+    | Nombre de la base de datos | ${MONGO_DB_NAME}               | Nombre de la base que usará la aplicación     |
+
+1.2 Variables de Entorno
+    - MONGO_URI: URI de conexión completa de MongoDB Atlas
+    - MONGO_DB_NAME: Nombre de la base de datos
+
+2. CONFIGURACIÓN EN LA APLICACIÓN
+--------------------------------
+2.1 Configuración en application.yml
+```yaml
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI}
+      database: ${MONGO_DB_NAME}
+      auto-index-creation: true
+      ssl: true
+```
+
+2.2 Configuración de Seguridad
+    - SSL/TLS habilitado por defecto
+    - Autenticación requerida
+    - IP Whitelist configurada en MongoDB Atlas
+
+3. MONITOREO EN MONGODB ATLAS
+----------------------------
+3.1 Métricas Disponibles
+    - Operaciones por segundo
+    - Latencia de operaciones
+    - Uso de memoria
+    - Uso de disco
+    - Conexiones activas
+
+3.2 Alertas Configurables
+    - Uso de CPU > 80%
+    - Uso de memoria > 80%
+    - Latencia > 100ms
+    - Errores de conexión
+
+4. BACKUP Y RECUPERACIÓN
+------------------------
+4.1 Configuración de Backups
+    - Frecuencia: Diaria
+    - Retención: 7 días
+    - Tipo: Completo
+
+4.2 Puntos de Recuperación
+    - Restauración a punto en el tiempo
+    - Restauración completa
+    - Restauración selectiva
+
+5. ESCALABILIDAD
+----------------
+5.1 Opciones de Escalado
+    - Vertical: Aumentar recursos
+    - Horizontal: Replicación
+    - Sharding: Distribución de datos
+
+5.2 Límites y Cuotas
+    - Almacenamiento máximo
+    - Operaciones por segundo
+    - Conexiones simultáneas
+
+6. MANTENIMIENTO
+----------------
+6.1 Tareas Programadas
+    - Limpieza de índices no utilizados
+    - Compactación de colecciones
+    - Rotación de logs
+
+6.2 Actualizaciones
+    - Versión de MongoDB
+    - Parches de seguridad
+    - Actualizaciones de configuración
+
+==================================================
+FIN DE LA PLANTILLA
+================================================== 
