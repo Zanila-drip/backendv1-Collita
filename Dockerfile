@@ -1,14 +1,12 @@
-# Usa una imagen oficial de Java 17 para correr aplicaciones Spring Boot
-FROM eclipse-temurin:17-jdk-alpine
-
-# Crea un directorio para la app
+# Etapa 1: Construcción del JAR usando Gradle
+FROM gradle:8.4.0-jdk17-alpine AS build
 WORKDIR /app
+COPY . .
+RUN gradle clean build -x test
 
-# Copia el JAR generado por Gradle al contenedor
-COPY build/libs/*.jar app.jar
-
-# Expón el puerto 8080 (Railway usará la variable $PORT)
+# Etapa 2: Imagen ligera para correr la app
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080
-
-# Comando para correr la app
 ENTRYPOINT ["java", "-jar", "app.jar"] 
