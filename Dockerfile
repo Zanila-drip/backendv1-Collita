@@ -1,8 +1,8 @@
-# Etapa 1: Construcción del JAR usando Gradle
+# Etapa 1: Construcción del JAR ejecutable usando Spring Boot
 FROM gradle:8.4.0-jdk17-alpine AS build
 WORKDIR /app
 COPY . .
-RUN gradle clean build -x test
+RUN gradle bootJar -x test
 
 # Etapa 2: Imagen ligera para correr la app
 FROM eclipse-temurin:17-jdk-alpine
