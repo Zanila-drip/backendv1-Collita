@@ -1,5 +1,6 @@
 package com.desarrollomovil.demo12.controller
 
+import com.desarrollomovil.demo12.dto.LoginRequestDto
 import com.desarrollomovil.demo12.dto.UsuarioDto
 import com.desarrollomovil.demo12.service.UsuarioService
 import com.desarrollomovil.demo12.service.UsuarioDuplicadoException
@@ -13,7 +14,14 @@ import org.springframework.web.bind.annotation.*
 class UsuarioController(private val usuarioService: UsuarioService) {
 
     @GetMapping
-    fun getAll(): List<UsuarioDto> = usuarioService.findAll()
+    fun getAll(): List<UsuarioDto> {
+        val usuarios = usuarioService.findAll()
+        println("Usuarios encontrados: ${usuarios.size}")
+        usuarios.forEach { usuario ->
+            println("Usuario: ${usuario.nombreUsuario}, Correo: ${usuario.correo}, CURP: ${usuario.curpUsuario}")
+        }
+        return usuarios
+    }
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: String): ResponseEntity<Any> {
@@ -28,6 +36,20 @@ class UsuarioController(private val usuarioService: UsuarioService) {
             ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.create(usuarioDto))
         } catch (e: UsuarioDuplicadoException) {
             ResponseEntity.status(HttpStatus.CONFLICT).body(mapOf("error" to e.message))
+        }
+    }
+
+    @PostMapping("/login")
+    fun login(@RequestBody loginRequest: LoginRequestDto): ResponseEntity<Any> {
+        return try {
+            println("Intento de login con correo: ${loginRequest.correo} y CURP: ${loginRequest.curpUsuario}")
+            val usuario = usuarioService.login(loginRequest.correo, loginRequest.curpUsuario)
+            println("Login exitoso para usuario: ${usuario.nombreUsuario}")
+            ResponseEntity.ok(usuario)
+        } catch (e: Exception) {
+            println("Error en login: ${e.message}")
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(mapOf("error" to "Credenciales inválidas"))
         }
     }
 

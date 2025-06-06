@@ -21,6 +21,21 @@ class UsuarioService(private val usuarioRepository: UsuarioRepository) {
         return usuarioRepository.findById(id).map { it.toDto() }
     }
 
+    fun login(correo: String, curpUsuario: String): UsuarioDto {
+        println("Buscando usuario con correo: $correo")
+        val usuario = usuarioRepository.findByCorreo(correo.lowercase().trim())
+            ?: throw RuntimeException("Usuario no encontrado")
+        
+        println("Usuario encontrado: ${usuario.correo}")
+        println("Comparando CURP: ${usuario.curpUsuario} con ${curpUsuario}")
+        
+        if (usuario.curpUsuario.uppercase().trim() != curpUsuario.uppercase().trim()) {
+            throw RuntimeException("CURP incorrecto")
+        }
+        
+        return usuario.toDto()
+    }
+
     @Transactional
     fun create(usuarioDto: UsuarioDto): UsuarioDto {
         try {
