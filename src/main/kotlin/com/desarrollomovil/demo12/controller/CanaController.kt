@@ -37,6 +37,10 @@ class CanaController(private val canaService: CanaService) {
         return ResponseEntity.ok(canaService.getCanaByUsuario(idUsuario, fecha))
     }
 
+    @GetMapping("/usuario/{idUsuario}/todas")
+    fun getAllCanaByUsuario(@PathVariable idUsuario: String): ResponseEntity<List<CanaDto>> =
+        ResponseEntity.ok(canaService.getAllCanaByUsuario(idUsuario))
+
     @PostMapping
     fun create(@Valid @RequestBody dto: CanaDto): ResponseEntity<CanaDto> =
         ResponseEntity.status(HttpStatus.CREATED).body(canaService.create(dto))

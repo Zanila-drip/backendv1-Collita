@@ -9,4 +9,5 @@ import java.time.LocalDate
 interface CanaRepository : MongoRepository<CanaEntity, String> {
     fun findByFecha(fecha: LocalDate): List<CanaEntity>
     fun findByFechaAndIdUsuario(fecha: LocalDate, idUsuario: String): List<CanaEntity>
+    fun findByIdUsuario(idUsuario: String): List<CanaEntity>
 } 

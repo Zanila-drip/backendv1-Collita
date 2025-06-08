@@ -6,10 +6,10 @@ import java.time.LocalTime
 data class CanaDto(
     val id: String? = null,
     val idUsuario: String,
-    val horaInicioUsuario: LocalTime,
-    val horaFinalUsuario: LocalTime,
+    val horaInicioUsuario: String,
+    val horaFinalUsuario: String,
     val cantidadCanaUsuario: Double,
     val fecha: LocalDate,
-    val fechaUsuario: LocalDate,
-    val pdfUsuario: String? = null
+    val fechaUsuario: String,
+    val resumenCosecha: String? = null
 ) 
